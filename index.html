@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Sangeetha</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Sacramento&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #ffe4ec, #fff0f6);
+  text-align: center;
+  overflow-x: hidden;
+}
+
+.container {
+  padding: 40px 20px;
+}
+
+h1 {
+  font-size: 3rem;
+  color: #ff4f8b;
+}
+
+.name {
+  font-family: 'Sacramento', cursive;
+  font-size: 3rem;
+  color: #ff4f8b;
+}
+
+.card {
+  background: white;
+  padding: 25px;
+  margin: 20px auto;
+  max-width: 600px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  background: #ff4f8b;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #ff2e74;
+}
+
+.hidden {
+  display: none;
+}
+
+.memory {
+  margin-top: 15px;
+  font-size: 0.95rem;
+}
+
+.cake {
+  font-size: 4rem;
+  margin-top: 20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="name">For Sangeetha 💖</div>
+  <h1>Happy Birthday 🎉</h1>
+
+  <p>A small surprise made specially for you 😊</p>
+
+  <button onclick="showMessage()">Open Your Surprise ✨</button>
+
+  <div id="message" class="card hidden">
+    <p>
+      Hey Sangeetha 😄 <br><br>
+
+      Happy Birthday to the most amazing friend I have! 🎉❤️ <br><br>
+
+      Honestly, life would have been so boring without you da. <br>
+      From random talks to all those office memories… everything feels so special because of you. <br><br>
+
+      Stay happy, always ippadiye sirichitu iru 😊 <br>
+      You deserve all the good things in life.
+    </p>
+  </div>
+
+  <div id="memory" class="card hidden">
+    <h3>Why You Are Special 🌸</h3>
+    <div class="memory">😄 Your smile makes everything better</div>
+    <div class="memory">☕ Random talks = best memories</div>
+    <div class="memory">🏢 Office days were fun because of you</div>
+    <div class="memory">🌟 You bring positive vibes always</div>
+  </div>
+
+  <div id="cake" class="hidden">
+    <div class="cake">🎂</div>
+    <button onclick="celebrate()">Celebrate 🎉</button>
+  </div>
+
+</div>
+
+<script>
+function showMessage() {
+  document.getElementById("message").classList.remove("hidden");
+  document.getElementById("memory").classList.remove("hidden");
+  document.getElementById("cake").classList.remove("hidden");
+}
+
+function celebrate() {
+  alert("Happy Birthday Sangeetha 🎉❤️");
+}
+</script>
+
+</body>
+</html>
