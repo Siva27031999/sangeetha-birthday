@@ -251,19 +251,130 @@
       }
     }
 
+    .lock-screen{
+      position:fixed;
+      inset:0;
+      z-index:9999;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      background:linear-gradient(135deg, rgba(255,247,251,0.97), rgba(255,238,245,0.97));
+      backdrop-filter:blur(6px);
+    }
+
+    .lock-card{
+      width:min(460px,100%);
+      text-align:center;
+      background:rgba(255,255,255,0.96);
+      border-radius:28px;
+      box-shadow:0 18px 45px rgba(232,93,142,0.18);
+      padding:32px 22px;
+    }
+
+    .lock-icon{
+      font-size:3rem;
+      margin-bottom:10px;
+    }
+
+    .lock-title{
+      font-size:1.8rem;
+      font-weight:800;
+      color:var(--accent);
+      margin-bottom:8px;
+    }
+
+    .lock-text{
+      color:var(--muted);
+      line-height:1.7;
+      margin-bottom:20px;
+      font-size:1rem;
+    }
+
+    .pin-input{
+      width:100%;
+      max-width:260px;
+      padding:14px 16px;
+      border:2px solid #f3c7d7;
+      border-radius:16px;
+      outline:none;
+      font-size:1.3rem;
+      text-align:center;
+      letter-spacing:8px;
+      color:var(--text);
+      background:#fff;
+      margin-bottom:14px;
+    }
+
+    .pin-input:focus{
+      border-color:var(--accent);
+      box-shadow:0 0 0 4px rgba(232,93,142,0.1);
+    }
+
+    .error-msg{
+      min-height:24px;
+      color:#d6456f;
+      font-size:.95rem;
+      margin-top:6px;
+      font-weight:600;
+    }
+
+    .hint{
+      margin-top:10px;
+      font-size:.9rem;
+      color:var(--muted);
+    }
+
+    .hidden-lock{
+      display:none;
+    }
+
     @media(max-width:640px){
-      .hero-card,.section .card{
+      .hero-card,.section .card,.lock-card{
         padding:24px 16px;
       }
 
       button{
         width:100%;
       }
+
+      .pin-input{
+        letter-spacing:6px;
+        font-size:1.15rem;
+      }
     }
   </style>
 </head>
 <body>
   <div class="bg-hearts" id="bgHearts"></div>
+
+  <div class="lock-screen" id="lockScreen">
+    <div class="lock-card">
+      <div class="lock-icon">🔐</div>
+      <div class="lock-title">A Small Birthday Surprise</div>
+      <div class="lock-text">
+        This page is locked for now.<br>
+        Enter the 6-digit secret code to open the surprise ✨
+      </div>
+
+      <input
+        type="password"
+        inputmode="numeric"
+        maxlength="6"
+        class="pin-input"
+        id="pinInput"
+        placeholder="••••••"
+        autocomplete="off"
+      >
+
+      <div class="btns">
+        <button class="primary" onclick="unlockPage()">Unlock Surprise</button>
+      </div>
+
+      <div class="error-msg" id="errorMsg"></div>
+      <div class="hint">Secret code will be shared later 💖</div>
+    </div>
+  </div>
 
   <div class="container">
     <section class="hero">
@@ -362,6 +473,8 @@
   </div>
 
   <script>
+    const SECRET_PIN = "637992";
+
     const heartWrap = document.getElementById("bgHearts");
     const symbols = ["💮","✨","🌸","💐","🎉"];
 
@@ -392,6 +505,27 @@
       burstConfetti(120);
       alert("Happy Birthday Sangeetha 🎉");
     }
+
+    function unlockPage(){
+      const pinInput = document.getElementById("pinInput");
+      const errorMsg = document.getElementById("errorMsg");
+      const enteredPin = pinInput.value.trim();
+
+      if(enteredPin === SECRET_PIN){
+        document.getElementById("lockScreen").classList.add("hidden-lock");
+        burstConfetti(90);
+      } else {
+        errorMsg.textContent = "Wrong code. Please enter the correct 6-digit number.";
+        pinInput.value = "";
+        pinInput.focus();
+      }
+    }
+
+    document.getElementById("pinInput").addEventListener("keypress", function(e){
+      if(e.key === "Enter"){
+        unlockPage();
+      }
+    });
 
     function burstConfetti(count){
       const colors = ["#e85d8e","#f59fbc","#ffd166","#95d5b2","#a0c4ff","#cdb4db"];
